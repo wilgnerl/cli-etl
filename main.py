@@ -34,8 +34,11 @@ def ask_yes_no_question(question):
     return questionary.confirm(question).ask()
 
 
+from pathlib import Path
+
+
 def create_project_folder(macro_area, micro_area, project_name):
-    """Cria as pastas para o projeto."""
+    """Cria as pastas para o projeto, se elas não existirem."""
     workflows_path = (
         Path(PROJECT_FOLDER)
         / macro_area
@@ -44,11 +47,19 @@ def create_project_folder(macro_area, micro_area, project_name):
         / "workflows"
         / "etl_tools"
     )
-    workflows_path.mkdir(parents=True, exist_ok=True)
 
     routes_path = (
         Path(PROJECT_FOLDER) / macro_area / micro_area / project_name / "routes"
     )
+
+    # Verifica se as pastas já existem
+    if workflows_path.exists() or routes_path.exists():
+        raise FileExistsError(
+            f"O projeto '{project_name}' já existe em '{macro_area}/{micro_area}'."
+        )
+
+    # Cria as pastas
+    workflows_path.mkdir(parents=True, exist_ok=True)
     routes_path.mkdir(parents=True, exist_ok=True)
 
     return workflows_path, routes_path
