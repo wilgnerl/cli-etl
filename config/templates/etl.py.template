@@ -1,0 +1,25 @@
+from modules.{macro_area}.{micro_area}.{project_name}.etl_tools.extractor import Extractor
+from modules.{macro_area}.{micro_area}.{project_name}.etl_tools.transform import Transform
+from modules.{macro_area}.{micro_area}.{project_name}.etl_tools.loader import Loader
+import logging
+
+logger = logging.getLogger(__name__)
+
+class {class_name}ETL:
+    def __init__(self):
+        pass
+
+    def extract(self):
+        logger.info("Extract iniciado")
+        Extractor().extract()
+        logger.info("Extract finalizado")
+
+    def transform(self):
+        logger.info("Transform iniciado")
+        Transform().transform()
+        logger.info("Transform finalizado")
+
+    def load(self):
+        logger.info("Loader iniciado")
+        Loader().load()
+        logger.info("Loader finalizado")

@@ -1,0 +1,13 @@
+from fastapi import APIRouter, FastAPI, status
+from fastapi.responses import JSONResponse
+
+{project_name}_routes = APIRouter(prefix="{project_name}")
+
+@{project_name}_routes.get("/", tags=["{project_name}"])
+async def example_func():
+    try:
+        return {{
+            "test": "test"
+        }}
+    except:
+        return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=[])
